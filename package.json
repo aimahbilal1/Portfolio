@@ -5,17 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm ci --include=dev && npm exec -- vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
     "lucide-react": "^0.383.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.185.1"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
+    "three": "^0.185.1",
     "vite": "^5.4.0"
   }
 }
