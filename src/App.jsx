@@ -29,6 +29,8 @@ const slugMap = {
   expensify: "expensify",
   taskmate: "taskmate",
   shopease: "shopease",
+  daraz: "daraz-redesign",
+  darazredesign: "daraz-redesign",
 };
 
 const projectImages = {};
@@ -53,12 +55,43 @@ Object.keys(projectImages).forEach((slug) => {
 /* ─── Data ─────────────────────────────────────────────────────────────────── */
 const PROJECTS = [
   {
+    slug: "daraz-redesign",
+    name: "Daraz Redesign",
+    years: "2026 · UI/UX Case Study",
+    desc: "A comprehensive UI/UX redesign and interactive prototype of the Daraz mobile shopping experience, streamlining product discovery, modernizing visual hierarchy, and optimizing checkout flows.",
+    tags: ["Figma", "UI/UX", "E-Commerce", "Prototype"],
+    link: null,
+    figmaLink: "https://www.figma.com/proto/ObkAVYz5HmcymSyUIiEYQ6/Daraz-redesign?node-id=1005-427&p=f&t=pWAILn3Z8xlZa73Y-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1",
+    images: projectImages["daraz-redesign"] || projectImages["daraz"] || [],
+  },
+  {
+    slug: "taskmate",
+    name: "TaskMate",
+    years: "2026 · Freelance",
+    desc: "20+ screen Figma system for an on demand home services platform featuring booking flow, provider profiles, chat, ratings, and order management.",
+    tags: ["Figma", "Design System"],
+    link: null,
+    figmaLink: "https://www.figma.com/proto/2VULMF8nSzAErGMFrKPyMr/taskmate?node-id=1-23&starting-point-node-id=1%3A2&t=V5qnsXcfkTYm8wYf-1",
+    images: projectImages["taskmate"] || [],
+  },
+  {
+    slug: "idea-catalyst",
+    name: "Idea Catalyst",
+    years: "Nov 2025 to Jan 2026",
+    desc: "A startup idea generator with user/admin roles and analytics based outputs, deployed live as a primary portfolio demo of frontend skill.",
+    tags: ["React", "JavaScript"],
+    link: "https://github.com/igmoiiz/IdeaCatalyst---Backend",
+    liveLink: "https://idea-catalyst.netlify.app/",
+    images: projectImages["idea-catalyst"] || projectImages["ideacatalyst"] || [],
+  },
+  {
     slug: "lets-chat",
     name: "Let's Chat",
     years: "Jan to Mar 2026",
     desc: "A fully functional, WhatsApp style messaging app with real time chat, communities, and voice/video call UI backed by Firebase.",
     tags: ["Flutter", "Firebase", "Realtime DB"],
     link: "https://github.com/aimahbilal1/Lets-chat",
+    figmaLink: "https://www.figma.com/proto/iBH0RfnCMXSOlCi7Lh28Lm/letd-chat?node-id=1-2&p=f&t=IfRj1lTIkCGPqEY4-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1",
     images: projectImages["lets-chat"] || projectImages["letschat"] || [],
   },
   {
@@ -77,16 +110,8 @@ const PROJECTS = [
     desc: "A premium, dark themed expense tracker with spending analytics, savings plans, category breakdowns, and multi account management.",
     tags: ["Flutter", "Dart", "Charts"],
     link: "https://github.com/aimahbilal1/Expensify",
+    figmaLink: "https://www.figma.com/proto/vNmFAKH6vt5q6mHC0OGWWy/expense-tracker?t=hriaGdYEApd0PQtR-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&node-id=13-123",
     images: projectImages["expensify"] || [],
-  },
-  {
-    slug: "taskmate",
-    name: "TaskMate",
-    years: "2026 · Freelance",
-    desc: "20+ screen Figma system for an on demand home services platform featuring booking flow, provider profiles, chat, ratings, and order management.",
-    tags: ["Figma", "Design System"],
-    link: null,
-    images: projectImages["taskmate"] || [],
   },
   {
     slug: "shopease",
@@ -96,16 +121,6 @@ const PROJECTS = [
     tags: ["Flutter", "Firebase", "Supabase"],
     link: "https://github.com/igmoiiz/Shop-Ease-Full_Stack",
     images: projectImages["shopease"] || [],
-  },
-  {
-    slug: "idea-catalyst",
-    name: "Idea Catalyst",
-    years: "Nov 2025 to Jan 2026",
-    desc: "A startup idea generator with user/admin roles and analytics based outputs, deployed live as a primary portfolio demo of frontend skill.",
-    tags: ["React", "JavaScript"],
-    link: "https://github.com/igmoiiz/IdeaCatalyst---Backend",
-    liveLink: "https://idea-catalyst.netlify.app/",
-    images: projectImages["idea-catalyst"] || projectImages["ideacatalyst"] || [],
   },
   {
     slug: "oric-portal",
@@ -709,7 +724,7 @@ function ProjectCard({ project, onOpenLightbox }) {
               src={images[activeIdx]}
               alt={`${project.name} screenshot ${activeIdx + 1}`}
               className="ap-shot-main"
-              onClick={() => onOpenLightbox(images, activeIdx, project.name)}
+              onClick={() => onOpenLightbox(images, activeIdx, project.name, project.figmaLink)}
             />
             {images.length > 1 && (
               <span className="ap-shot-badge">{activeIdx + 1}/{images.length}</span>
@@ -747,8 +762,25 @@ function ProjectCard({ project, onOpenLightbox }) {
             )}
           </>
         ) : (
-          <div className="ap-shot-placeholder">
-            <span>Drop screenshot in<br /><code>src/assets/projects/</code></span>
+          <div
+            className="ap-shot-placeholder"
+            style={project.figmaLink ? { cursor: "pointer" } : {}}
+            onClick={
+              project.figmaLink
+                ? () => window.open(project.figmaLink, "_blank", "noopener,noreferrer")
+                : undefined
+            }
+            title={project.figmaLink ? "Open interactive prototype in Figma" : undefined}
+          >
+            {project.figmaLink ? (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "16px", textAlign: "center" }}>
+                <ArrowUpRight size={22} style={{ color: "var(--accent)" }} />
+                <span style={{ fontWeight: 600, color: "var(--paper)", fontSize: "13px" }}>Open Figma Prototype</span>
+                <span style={{ fontSize: "11px", color: "var(--gray-2)" }}>Click here or button below to view design</span>
+              </div>
+            ) : (
+              <span>Drop screenshot in<br /><code>src/assets/projects/</code></span>
+            )}
           </div>
         )}
       </div>
@@ -768,9 +800,9 @@ function ProjectCard({ project, onOpenLightbox }) {
         <div className="ap-tag-row">
           {project.tags.map((t) => <span className="ap-tag" key={t}>{t}</span>)}
         </div>
-        {(project.link || project.liveLink) && (
+        {(project.link || project.liveLink || project.figmaLink) && (
           <div className="ap-link-row">
-            {project.link && (
+            {project.link && !project.link.includes("figma.com") && (
               <a className="ap-link" href={project.link} target="_blank" rel="noopener noreferrer">
                 View on GitHub <ArrowUpRight size={13} />
               </a>
@@ -778,6 +810,16 @@ function ProjectCard({ project, onOpenLightbox }) {
             {project.liveLink && (
               <a className="ap-link" href={project.liveLink} target="_blank" rel="noopener noreferrer">
                 Live Site <ArrowUpRight size={13} />
+              </a>
+            )}
+            {(project.figmaLink || (project.link && project.link.includes("figma.com"))) && (
+              <a
+                className="ap-link"
+                href={project.figmaLink || project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Figma Prototype <ArrowUpRight size={13} />
               </a>
             )}
           </div>
@@ -844,7 +886,8 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox]);
 
-  const openLightbox = (images, index, name) => setLightbox({ images, index, name });
+  const openLightbox = (images, index, name, figmaLink = null) =>
+    setLightbox({ images, index, name, figmaLink });
 
   /* Phone tilt */
   const handleHeroMove = useCallback((e) => {
@@ -1022,8 +1065,8 @@ export default function App() {
                 <a href="#contact" className="ap-btn ap-btn-ghost">Let's Connect</a>
               </div>
               <div className="ap-stat-row">
-                <div><div className="ap-num">9+</div><div className="ap-label">projects delivered</div></div>
-                <div><div className="ap-num">6th</div><div className="ap-label">semester, BSCS</div></div>
+                <div><div className="ap-num">10+</div><div className="ap-label">projects delivered</div></div>
+                <div><div className="ap-num">7th</div><div className="ap-label">semester, BSCS</div></div>
                 <div><div className="ap-num">3.29</div><div className="ap-label">CGPA</div></div>
               </div>
             </div>
@@ -1092,7 +1135,7 @@ export default function App() {
               <h3 className="sr-child" style={{ "--i": 1 }}>BS Computer Science</h3>
               <div className="ap-school sr-child" style={{ "--i": 2 }}>Air University, Multan Campus</div>
               <div className="ap-edu-row sr-child" style={{ "--i": 3 }}>
-                <span>Aug 2023 to Jun 2027</span><b>6th Semester</b>
+                <span>Aug 2023 to Jun 2027</span><b>7th Semester</b>
               </div>
               <div className="ap-edu-row ap-edu-row-last sr-child" style={{ "--i": 4 }}>
                 <span>CGPA</span><b>3.29</b>
@@ -1136,7 +1179,7 @@ export default function App() {
             <div className="ap-eyebrow sr-child" style={{ "--i": 0 }}>
               <span className="ap-eyebrow-num">04</span> selected work
             </div>
-            <h2 className="ap-h2 sr-child" style={{ "--i": 1 }}>Nine builds, one obsession with detail.</h2>
+            <h2 className="ap-h2 sr-child" style={{ "--i": 1 }}>Ten builds, one obsession with detail.</h2>
             <p className="ap-section-sub sr-child" style={{ "--i": 2 }}>
               Each card represents a real project or platform. Click image to expand screenshot lightbox.
             </p>
@@ -1346,7 +1389,17 @@ export default function App() {
             )}
 
             <div className="ap-lightbox-caption">
-              {lightbox.name} ({lightbox.index + 1} / {lightbox.images.length})
+              <span>{lightbox.name} ({lightbox.index + 1} / {lightbox.images.length})</span>
+              {lightbox.figmaLink && (
+                <a
+                  href={lightbox.figmaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ marginLeft: 16, color: "var(--accent)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: 4 }}
+                >
+                  Open Figma Prototype <ArrowUpRight size={14} />
+                </a>
+              )}
             </div>
           </div>
         </div>
