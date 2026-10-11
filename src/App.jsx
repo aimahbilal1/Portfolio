@@ -31,6 +31,7 @@ const slugMap = {
   shopease: "shopease",
   daraz: "daraz-redesign",
   darazredesign: "daraz-redesign",
+  foodloop: "foodloop",
 };
 
 const projectImages = {};
@@ -73,6 +74,16 @@ const PROJECTS = [
     link: null,
     figmaLink: "https://www.figma.com/proto/2VULMF8nSzAErGMFrKPyMr/taskmate?node-id=1-23&starting-point-node-id=1%3A2&t=V5qnsXcfkTYm8wYf-1",
     images: projectImages["taskmate"] || [],
+  },
+  {
+    slug: "foodloop",
+    name: "FoodLoop",
+    years: "2026 · UI/UX Case Study",
+    desc: "A community-driven surplus food reservation app connecting local restaurants, bakeries, and university cafeterias with students and locals to reduce food waste through intuitive discovery, filtering, and instant reservations.",
+    tags: ["Figma", "UI/UX Design", "Mobile App", "Prototype", "Design System"],
+    link: null,
+    figmaLink: "https://www.figma.com/design/P9r7O3LOFxWsN7n65AzUHx/foodloop?node-id=0-1&t=uclSnwyuXye1c88c-1",
+    images: projectImages["foodloop"] || [],
   },
   {
     slug: "idea-catalyst",
@@ -1065,7 +1076,7 @@ export default function App() {
                 <a href="#contact" className="ap-btn ap-btn-ghost">Let's Connect</a>
               </div>
               <div className="ap-stat-row">
-                <div><div className="ap-num">10+</div><div className="ap-label">projects delivered</div></div>
+                <div><div className="ap-num">11+</div><div className="ap-label">projects delivered</div></div>
                 <div><div className="ap-num">7th</div><div className="ap-label">semester, BSCS</div></div>
                 <div><div className="ap-num">3.29</div><div className="ap-label">CGPA</div></div>
               </div>
@@ -1179,7 +1190,7 @@ export default function App() {
             <div className="ap-eyebrow sr-child" style={{ "--i": 0 }}>
               <span className="ap-eyebrow-num">04</span> selected work
             </div>
-            <h2 className="ap-h2 sr-child" style={{ "--i": 1 }}>Ten builds, one obsession with detail.</h2>
+            <h2 className="ap-h2 sr-child" style={{ "--i": 1 }}>Eleven builds, one obsession with detail.</h2>
             <p className="ap-section-sub sr-child" style={{ "--i": 2 }}>
               Each card represents a real project or platform. Click image to expand screenshot lightbox.
             </p>
